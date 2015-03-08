@@ -33,8 +33,8 @@ fanmerc::PointerMap<POINTERTYPE>::~PointerMap()
 {
   if( _autoDelete)
   {
-    for( typename PointerMap<POINTERTYPE>::iterator it = begin();
-         it != end(); ++it)
+    for( typename PointerMap<POINTERTYPE>::iterator it = this->begin();
+         it != this->end(); ++it)
     {
       delete it->second;
     }

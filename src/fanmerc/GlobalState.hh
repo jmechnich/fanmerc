@@ -22,6 +22,8 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <cstdlib>
+#include <sstream>
 
 namespace fanmerc
 {

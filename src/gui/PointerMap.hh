@@ -21,8 +21,8 @@
 #include <map>
 #include <string>
 
-#include <qstring.h>
-#include <qpixmap.h>
+#include <QString>
+#include <QPixmap>
 
 namespace fanmerc
 {

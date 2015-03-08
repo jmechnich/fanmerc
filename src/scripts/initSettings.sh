@@ -3,8 +3,11 @@
 #  Automatic Compilation and Installation script
 #
 
-touch $HOME/.qt/fanmercrc \
-&& echo "[General]" > $HOME/.qt/fanmercrc \
-&& echo "imageDir=$BUILDDIR/share/fanmerc/images" >> $HOME/.qt/fanmercrc \
-&& echo "soundDir=$BUILDDIR/share/fanmerc/sounds" >> $HOME/.qt/fanmercrc \
-&& echo "" >> $HOME/.qt/fanmercrc
+set -e
+
+TARGET="$HOME/.config/mechnich/fanmerc.conf"
+mkdir -p `dirname "$TARGET"`
+echo "[General]" > "$TARGET"
+echo "imageDir=$BUILDDIR/share/fanmerc/images" >> "$TARGET"
+echo "soundDir=$BUILDDIR/share/fanmerc/sounds" >> "$TARGET"
+echo "" >> "$TARGET"

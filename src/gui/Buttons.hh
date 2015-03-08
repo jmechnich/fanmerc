@@ -18,14 +18,14 @@
 #ifndef BUTTONS_HH
 #define BUTTONS_HH
 
-#include <qbutton.h>
+#include <QAbstractButton>
 
 class QPixmap;
 class QBitmap;
 
 namespace fanmerc
 {
-class Button : public QButton
+class Button : public QAbstractButton
 {
   Q_OBJECT
 
@@ -44,7 +44,7 @@ signals:
 protected:
   void enterEvent( QEvent*);
   void leaveEvent( QEvent*);
-  void drawButton( QPainter* painter);
+  void paintEvent( QPaintEvent* e);
   void mousePressEvent( QMouseEvent* e);
   void mouseReleaseEvent( QMouseEvent* e);
   

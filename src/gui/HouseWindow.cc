@@ -19,26 +19,26 @@
 
 #include "TownWindow.hh"
 
-#include <qapplication.h>
-#include <qrect.h>
-#include <qlistbox.h>
-#include <qpushbutton.h>
+#include <QApplication>
+#include <QRect>
+#include <QListWidget>
+#include <QPushButton>
 
 /*=========================================================================
  *  DESCRIPTION OF FUNCTION:
  *  ==> see headerfile
  *=======================================================================*/
 fanmerc::HouseWindow::HouseWindow( const QString& name,
-                                   TownWindow* parent,
-                                   WFlags f)
-        :QWidget( parent, name.latin1(), f), _name( name)
+                                   TownWindow* parent)
+        :QWidget( parent), _name( name)
 {
-  Shop* shop = parent->town()->shop( name.latin1());
+  setAttribute(Qt::WA_DeleteOnClose);
+  Shop* shop = parent->town()->shop( name.toStdString());
   
-  _widget = new QDialog( 0, 0, true,
-                         Qt::WStyle_Splash | Qt::WDestructiveClose);
+  _widget = new QDialog( 0, Qt::SplashScreen);
+  _widget->setAttribute(Qt::WA_DeleteOnClose);
 
-  QRect screenRect = QApplication::desktop()->availableGeometry();
+  QRect screenRect = parent->geometry();
   _widget->setFixedSize( 450, 600);
 
   _widget->move( screenRect.center().x() - _widget->width()/2,
@@ -54,30 +54,30 @@ fanmerc::HouseWindow::HouseWindow( const QString& name,
   closeButton->move( _widget->width() - closeButton->width()-10,
                      _widget->height() - closeButton->height()-10);
 
-  QListBox* listBox = new QListBox( _widget);
+  QListWidget* listBox = new QListWidget( _widget);
   listBox->setGeometry( 10, 10,
                         _widget->width()-20,
                         _widget->height()-closeButton->height()-25);
 
-  listBox->insertItem( "Stats:");
+  listBox->addItem( "Stats:");
   for( Shop::const_iterator it = shop->statsBegin();
        it != shop->statsEnd(); ++it)
   {
-    listBox->insertItem(
+    listBox->addItem(
         QString( it->first.c_str()) + QString(": ") +
         QString( it->second.c_str()));
   }
-  listBox->insertItem("");
+  listBox->addItem("");
 
-  listBox->insertItem( "Actions:");
+  listBox->addItem( "Actions:");
   for( Shop::const_iterator it = shop->descBegin();
        it != shop->descEnd(); ++it)
   {
-    listBox->insertItem(
+    listBox->addItem(
         QString( it->first.c_str()) + QString(": ") +
         QString( it->second.c_str()));
   }
-  listBox->insertItem("");
+  listBox->addItem("");
 
   _widget->show();
 }

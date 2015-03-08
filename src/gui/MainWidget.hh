@@ -18,10 +18,10 @@
 #ifndef MAINWIDGET_HH
 #define MAINWIDGET_HH
 
-#include <qpixmap.h>
-#include <qbitmap.h>
-#include <qsound.h>
-#include <qwidgetstack.h>
+#include <QPixmap>
+#include <QBitmap>
+#include <QSound>
+#include <QStackedWidget>
 
 #include "PointerMap.hh"
 
@@ -37,7 +37,7 @@ namespace fanmerc
 
   class NodeWindow;
   
-class MainWidget : public QWidgetStack
+class MainWidget : public QStackedWidget
 {
   Q_OBJECT
 

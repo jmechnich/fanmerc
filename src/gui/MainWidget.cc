@@ -22,10 +22,12 @@
 #include "LoadGameWindow.hh"
 #include "TownWindow.hh"
 
-#include <qapplication.h>
-#include <qsound.h>
-#include <qpainter.h>
-#include <qmessagebox.h>
+#include <QApplication>
+#include <QDesktopWidget>
+#include <QSound>
+#include <QPainter>
+#include <QMessageBox>
+#include <QKeyEvent>
 
 #include <iostream>
 
@@ -36,11 +38,14 @@
 fanmerc::MainWidget::MainWidget( PointerMap<QPixmap*>* imageMap,
                                  PointerMap<QBitmap*>* maskMap,
                                  PointerMap<QSound*>* soundMap)
-        :QWidgetStack(), _imageMap( imageMap), _maskMap( maskMap),
+        :QStackedWidget(), _imageMap( imageMap), _maskMap( maskMap),
          _soundMap( soundMap),
          _globalState( new GlobalState)
 {
-  showFullScreen();
+  //showFullScreen();
+  setFixedSize( 1024, 768);
+  QRect screenRect = QApplication::desktop()->availableGeometry();
+  move(screenRect.width()/2  - 512, screenRect.height()/2 - 384);
   
   mainMenu();
 }
@@ -52,10 +57,10 @@ fanmerc::MainWidget::MainWidget( PointerMap<QPixmap*>* imageMap,
 void
 fanmerc::MainWidget::mainMenu()
 {
-  QWidget* oldWid = visibleWidget();
+  QWidget* oldWid = currentWidget();
   QWidget* newWid = new MainMenuWindow( this);
   addWidget( newWid);
-  raiseWidget( newWid);
+  setCurrentWidget( newWid);
 
   if( oldWid != 0)
   {
@@ -72,11 +77,11 @@ void
 fanmerc::MainWidget::newGame()
 {
   QWidget* wid = 0;
-  wid = visibleWidget();
+  wid = currentWidget();
 
   QWidget* newWid = new NodeCreateChar( this);
   addWidget( newWid);
-  raiseWidget( newWid);
+  setCurrentWidget( newWid);
 
   if( wid != 0)
   {
@@ -94,7 +99,7 @@ fanmerc::MainWidget::startGame( NodeWindow* oldNode)
 {
   QWidget* newWid = new TownWindow( this);
   addWidget( newWid);
-  raiseWidget( newWid);
+  setCurrentWidget( newWid);
 
   if( oldNode != 0)
   {
@@ -111,11 +116,11 @@ void
 fanmerc::MainWidget::loadGame()
 {
   QWidget* wid = 0;
-  wid = visibleWidget();
+  wid = currentWidget();
 
   LoadGameWindow* newWid = new LoadGameWindow( this);
   addWidget( newWid);
-  raiseWidget( newWid);
+  setCurrentWidget( newWid);
   if( wid != 0)
   {
     removeWidget( wid);
@@ -132,7 +137,7 @@ fanmerc::MainWidget::loadGame()
 void
 fanmerc::MainWidget::exitGame()
 {
-  switch( QMessageBox::information( 0, "Quit Fanmerc",
+  switch( QMessageBox::information( this, "Quit Fanmerc",
                                     "Do you really want to quit ?",
                                     "Yes", "No", QString::null, 1))
   {
@@ -155,8 +160,8 @@ fanmerc::MainWidget::keyPressEvent( QKeyEvent* e)
 {
   switch( e->key())
   {
-  case(Key_Escape):
-    if( dynamic_cast<MainMenuWindow*>( visibleWidget()) != 0)
+  case(Qt::Key_Escape):
+    if( dynamic_cast<MainMenuWindow*>( currentWidget()) != 0)
     {
       exitGame();
     }

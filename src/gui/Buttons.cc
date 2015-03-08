@@ -17,9 +17,10 @@
 
 #include "Buttons.hh"
 
-#include <qpainter.h>
-#include <qbitmap.h>
-#include <qpixmap.h>
+#include <QPainter>
+#include <QBitmap>
+#include <QPixmap>
+#include <QMouseEvent>
 
 /*=========================================================================
  *  DESCRIPTION OF FUNCTION:
@@ -30,14 +31,15 @@ fanmerc::Button::Button( QPixmap* defaultPixmap,
                          QBitmap* mask,
                          QWidget* parent,
                          const char* name)
-        :QButton( parent, name, Qt::WResizeNoErase | Qt::WRepaintNoErase |
-                  Qt::WDestructiveClose),
+        :QAbstractButton( parent),
          _defaultPixmap( defaultPixmap),
          _highlightedPixmap( highlightedPixmap),
          _currentPixmap( defaultPixmap),
          _mousePressed( false),
          _highlighted( false)
 {
+  setObjectName( name);
+  setAttribute( Qt::WA_DeleteOnClose);
   setFixedSize( _defaultPixmap->width(), _defaultPixmap->height());
   setMask( *mask);
 }
@@ -73,9 +75,10 @@ fanmerc::Button::leaveEvent( QEvent*)
  *  ==> see headerfile
  *=======================================================================*/
 void
-fanmerc::Button::drawButton( QPainter* painter)
+fanmerc::Button::paintEvent( QPaintEvent* e)
 {
-  painter->drawPixmap( 0, 0, *_currentPixmap);
+  QPainter painter(this);
+  painter.drawPixmap( 0, 0, *_currentPixmap);
 }
 
 /*=========================================================================

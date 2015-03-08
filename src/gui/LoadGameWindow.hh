@@ -18,7 +18,7 @@
 #ifndef LOADGAMEWINDOW_HH
 #define LOADGAMEWINDOW_HH
 
-#include <qwidget.h>
+#include <QWidget>
 
 #include <GlobalState.hh>
 

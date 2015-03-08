@@ -92,7 +92,7 @@ inline
 int
 fanmerc::Item::statAsInt( const std::string& name, bool* exists) const
 {
-  return atoi( statAsString( name, exists).c_str());
+  return std::atoi( statAsString( name, exists).c_str());
 }
 
 

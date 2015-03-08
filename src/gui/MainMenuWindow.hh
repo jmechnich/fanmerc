@@ -18,8 +18,7 @@
 #ifndef MAINMENUWINDOW_HH
 #define MAINMENUWINDOW_HH
 
-#include <qwidget.h>
-#include <qwidgetstack.h>
+#include <QWidget>
 
 namespace fanmerc
 {
@@ -30,7 +29,6 @@ namespace fanmerc
   {
   public:
     MainMenuWindow( MainWidget* parent);
-    ~MainMenuWindow();
     
   private:
     QWidget* _widget;

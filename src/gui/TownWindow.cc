@@ -18,12 +18,14 @@
 #include "TownWindow.hh"
 
 #include "MainWidget.hh"
+#include "Util.hh"
 #include "Buttons.hh"
 #include "StatusBar.hh"
 #include "HouseWindow.hh"
 
-#include <qapplication.h>
-#include <qrect.h>
+#include <QApplication>
+#include <QRect>
+#include <QStyleOption>
 
 /*=========================================================================
  *  DESCRIPTION OF FUNCTION:
@@ -32,10 +34,9 @@
 fanmerc::TownWindow::TownWindow( MainWidget* parent)
         :QWidget( parent), _parent( parent)
 {
-  QRect screenRect = QApplication::desktop()->availableGeometry();
+  QRect screenRect = parent->geometry();
+  setBackgroundImage(this,"bg_camp.png");
   
-  setPaletteBackgroundPixmap( *(parent->getPixmap("bg_camp.png")));
-
   _houseButtons["DEFENCE"] = new Button(
       parent->getPixmap("house_defence.png"),
       parent->getPixmap("house_defence_highlight.png"),
@@ -135,11 +136,11 @@ fanmerc::TownWindow::TownWindow( MainWidget* parent)
     it->second->show();
   }
 
-  _statusBar = new StatusBar( this, "status_bar", Qt::WDestructiveClose);
+  _statusBar = new StatusBar( this);
 
   QPixmap* pm = parent->getPixmap( "bg_camp_header.png");
   _statusBar->setFixedSize( pm->width(), pm->height());
-  _statusBar->setPaletteBackgroundPixmap( *pm);
+  setBackgroundImage(_statusBar, "bg_camp_header.png");
   _statusBar->updateDate( parent->global()->statAsInt( "date"));
   _statusBar->updateGold( parent->team()->statAsInt( "gold"));
   _statusBar->updateTeamname( parent->team()->statAsString( "name").c_str());
@@ -185,7 +186,7 @@ fanmerc::TownWindow::button( const std::string& name)
 void
 fanmerc::TownWindow::showHouseWindow()
 {
-  new HouseWindow( sender()->name(), this, Qt::WDestructiveClose);
+  new HouseWindow( sender()->objectName(), this);
 }
 
 /*=========================================================================
@@ -196,4 +197,17 @@ fanmerc::Town*
 fanmerc::TownWindow::town()
 {
   return _parent->town();
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+void
+fanmerc::TownWindow::paintEvent(QPaintEvent *pe)
+{
+  QStyleOption o;
+  o.initFrom(this);
+  QPainter p(this);
+  style()->drawPrimitive(QStyle::PE_Widget, &o, &p, this);
 }

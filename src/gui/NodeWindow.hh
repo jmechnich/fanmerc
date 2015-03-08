@@ -18,7 +18,7 @@
 #ifndef NODEWINDOW_HH
 #define NODEWINDOW_HH
 
-#include <qwidget.h>
+#include <QWidget>
 
 #include "Buttons.hh"
 
@@ -42,6 +42,8 @@ namespace fanmerc
     virtual void rightAction();
     
   protected:
+    void paintEvent(QPaintEvent* e);
+    
     Button* _title;
     Button* _leftButton;
     Button* _rightButton;

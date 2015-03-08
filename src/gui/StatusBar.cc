@@ -22,11 +22,11 @@
  *  DESCRIPTION OF FUNCTION:
  *  ==> see headerfile
  *=======================================================================*/
-fanmerc::StatusBar::StatusBar( QWidget* parent,
-                               const char* name,
-                               WFlags f)
-        :QWidget( parent, name, f)
-{}
+fanmerc::StatusBar::StatusBar( QWidget* parent)
+        :QWidget( parent)
+{
+  setAttribute( Qt::WA_DeleteOnClose);
+}
 
 /*=========================================================================
  *  DESCRIPTION OF FUNCTION:

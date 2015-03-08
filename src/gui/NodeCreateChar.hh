@@ -21,7 +21,7 @@
 #include "NodeWindow.hh"
 
 #include "Buttons.hh"
-#include <qwidget.h>
+#include <QWidget>
 
 namespace fanmerc
 {

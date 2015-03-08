@@ -18,9 +18,10 @@
 #include "NodeCreateChar.hh"
 
 #include "MainWidget.hh"
+#include "Util.hh"
 #include "NodeChooseCharDetails.hh"
 
-#include <qpixmap.h>
+#include <QPixmap>
 
 /*=========================================================================
  *  DESCRIPTION OF FUNCTION:
@@ -30,12 +31,12 @@ fanmerc::NodeCreateChar::NodeCreateChar( MainWidget* parent)
         :NodeWindow( parent, "lbl_createchars.png")
 {
   parent->global()->clear();
+
   _left = new QWidget( this);
   QPixmap* pm = parent->getPixmap( "box_create-left.png");
   _left->setFixedSize( pm->width(), pm->height());
-  
-  _left->setPaletteBackgroundPixmap( *pm);
   _left->move( 25, 150);
+  setBackgroundImage(_left, "box_create-left.png");
   _left->show();
 
   _createButton[0] =
@@ -81,9 +82,8 @@ fanmerc::NodeCreateChar::NodeCreateChar( MainWidget* parent)
   _right = new QWidget( this);
   pm = parent->getPixmap( "box_create-right.png");
   _right->setFixedSize( pm->width(), pm->height());
-  
-  _right->setPaletteBackgroundPixmap( *pm);
   _right->move( parent->width()-_right->width()-25, 150);
+  setBackgroundImage(_right, "box_create-right.png");
   _right->show();
 }
 
@@ -117,5 +117,5 @@ fanmerc::NodeCreateChar::createNew()
   NodeChooseCharDetails* wid = new NodeChooseCharDetails( _parent);
   wid->setPrevious( this);
   _parent->addWidget( wid);
-  _parent->raiseWidget( wid);
+  _parent->setCurrentWidget( wid);
 }

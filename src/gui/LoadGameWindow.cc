@@ -18,9 +18,10 @@
 #include "LoadGameWindow.hh"
 
 #include "MainWidget.hh"
+#include "Util.hh"
 
-#include <qfiledialog.h>
-#include <qstring.h>
+#include <QFileDialog>
+#include <QString>
 
 #include <fstream>
 
@@ -31,8 +32,7 @@
 fanmerc::LoadGameWindow::LoadGameWindow( MainWidget* parent)
         :QWidget( parent), _parent( parent)
 {
-  setPaletteBackgroundPixmap(
-      *(parent->getPixmap("bg_brown.png")));
+  setBackgroundImage(this, "bg_brown.png");
 }
 
 /*=========================================================================
@@ -46,7 +46,7 @@ fanmerc::LoadGameWindow::openFile( GlobalState* globalState)
   if( !filename.isNull())
   {
     globalState->clear();
-    std::ifstream is( filename.latin1());
+    std::ifstream is( filename.toStdString().c_str());
     globalState->read( is);
     _parent->startGame();
   }

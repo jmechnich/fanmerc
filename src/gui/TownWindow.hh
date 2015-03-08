@@ -18,7 +18,7 @@
 #ifndef TOWNWINDOW_HH
 #define TOWNWINDOW_HH
 
-#include <qwidget.h>
+#include <QWidget>
 
 #include <map>
 #include <string>
@@ -44,7 +44,10 @@ namespace fanmerc
     
   public slots:
     void showHouseWindow();
-    
+
+  protected:
+    void paintEvent( QPaintEvent* e);
+
   private:
     std::map<std::string,Button*> _houseButtons;
     StatusBar* _statusBar;

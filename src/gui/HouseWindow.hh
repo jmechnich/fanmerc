@@ -18,9 +18,9 @@
 #ifndef HOUSEWINDOW_HH
 #define HOUSEWINDOW_HH
 
-#include <qwidget.h>
-#include <qdialog.h>
-#include <qstring.h>
+#include <QWidget>
+#include <QDialog>
+#include <QString>
 
 #include <Shop.hh>
 
@@ -32,8 +32,7 @@ class TownWindow;
 class HouseWindow : public QWidget
 {
 public:
-  HouseWindow( const QString& name, TownWindow* parent,
-               WFlags f=0);
+  HouseWindow( const QString& name, TownWindow* parent);
 
 private:
   QDialog* _widget;

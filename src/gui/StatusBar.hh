@@ -18,9 +18,9 @@
 #ifndef STATUSBAR_HH
 #define STATUSBAR_HH
 
-#include <qwidget.h>
-#include <qstring.h>
-#include <qpainter.h>
+#include <QWidget>
+#include <QString>
+#include <QPainter>
 
 namespace fanmerc
 {
@@ -28,7 +28,7 @@ namespace fanmerc
 class StatusBar : public QWidget
 {
 public:
-  StatusBar( QWidget* parent=0, const char* name=0, WFlags f=0);
+  StatusBar( QWidget* parent=0);
   void updateDate( int date);
   void updateGold( int gold);
   void updateTeamname( const QString& teamname);

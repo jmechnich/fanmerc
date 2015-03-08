@@ -18,8 +18,9 @@
 #include "NodeChooseCharDetails.hh"
 
 #include "MainWidget.hh"
+#include "Util.hh"
 
-#include <qpixmap.h>
+#include <QPixmap>
 
 /*=========================================================================
  *  DESCRIPTION OF FUNCTION:
@@ -31,17 +32,15 @@ fanmerc::NodeChooseCharDetails::NodeChooseCharDetails( MainWidget* parent)
   _left = new QWidget( this);
   QPixmap* pm = parent->getPixmap( "box_choose-left.png");
   _left->setFixedSize( pm->width(), pm->height());
-  
-  _left->setPaletteBackgroundPixmap( *pm);
   _left->move( 25, 150);
+  setBackgroundImage(_left, "box_choose-left.png");
   _left->show();
 
   _right = new QWidget( this);
   pm = parent->getPixmap( "box_choose-right.png");
   _right->setFixedSize( pm->width(), pm->height());
-  
-  _right->setPaletteBackgroundPixmap( *pm);
   _right->move( parent->width()-_right->width()-25, 150);
+  setBackgroundImage(_right, "box_choose-right.png");
   _right->show();
 }
 
@@ -54,7 +53,7 @@ fanmerc::NodeChooseCharDetails::leftAction()
 {
   if( _prev != 0)
   {
-    _parent->raiseWidget( _prev);
+    _parent->setCurrentWidget( _prev);
     _parent->removeWidget( this);
     deleteLater();
   }

@@ -18,9 +18,12 @@
 #include "NodeWindow.hh"
 
 #include "MainWidget.hh"
+#include "Util.hh"
 
-#include <qpixmap.h>
-#include <qbitmap.h>
+#include <QPixmap>
+#include <QBitmap>
+#include <QStyleOption>
+#include <QPainter>
 
 /*=========================================================================
  *  DESCRIPTION OF FUNCTION:
@@ -29,12 +32,12 @@
 fanmerc::NodeWindow::NodeWindow( MainWidget* parent,
                                  const QString& titlePixmap,
                                  const QString& left, const QString& right)
-        :QWidget( parent, titlePixmap, Qt::WDestructiveClose),
+        :QWidget( parent),
          _parent( parent), _prev( 0)
 {
-  setPaletteBackgroundPixmap(
-      *(parent->getPixmap("bg_brown_lbl2.png")));
-
+  setAttribute( Qt::WA_DeleteOnClose);
+  setBackgroundImage(this, "bg_brown_lbl2.png");
+  
   _title = new Button( parent->getPixmap(titlePixmap),
                        parent->getPixmap(titlePixmap),
                        parent->getMask(titlePixmap),
@@ -111,4 +114,17 @@ void
 fanmerc::NodeWindow::setPrevious( NodeWindow* prev)
 {
   _prev = prev;
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+void
+fanmerc::NodeWindow::paintEvent(QPaintEvent *pe)
+{
+  QStyleOption o;
+  o.initFrom(this);
+  QPainter p(this);
+  style()->drawPrimitive(QStyle::PE_Widget, &o, &p, this);
 }
