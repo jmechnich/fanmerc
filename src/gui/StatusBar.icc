@@ -1,0 +1,52 @@
+/**************************************************************************
+**       Title: 
+**    $RCSfile: $
+**   $Revision: $$Name:  $
+**       $Date: $
+**   Copyright: GPL $Author: $
+** Description:
+**
+**    
+**
+**-------------------------------------------------------------------------
+**
+**  $Log: $
+**
+**
+**************************************************************************/
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+void
+fanmerc::StatusBar::updateDate( int date)
+{
+  _date = QString::number( date);
+  update();
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+void
+fanmerc::StatusBar::updateGold( int gold)
+{
+  _gold = QString::number( gold);
+  update();
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+void
+fanmerc::StatusBar::updateTeamname( const QString& teamname)
+{
+  _teamname = teamname;
+}
+

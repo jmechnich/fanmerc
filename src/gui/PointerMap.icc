@@ -1,0 +1,42 @@
+/**************************************************************************
+**       Title: 
+**    $RCSfile: $
+**   $Revision: $$Name:  $
+**       $Date: $
+**   Copyright: GPL $Author: $
+** Description:
+**
+**    
+**
+**-------------------------------------------------------------------------
+**
+**  $Log: $
+**
+**
+**************************************************************************/
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+template<class POINTERTYPE>
+fanmerc::PointerMap<POINTERTYPE>::PointerMap( bool autoDelete)
+        :std::map<std::string,POINTERTYPE>(), _autoDelete( autoDelete)
+{}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+template<class POINTERTYPE>
+fanmerc::PointerMap<POINTERTYPE>::~PointerMap()
+{
+  if( _autoDelete)
+  {
+    for( typename PointerMap<POINTERTYPE>::iterator it = begin();
+         it != end(); ++it)
+    {
+      delete it->second;
+    }
+  }
+}

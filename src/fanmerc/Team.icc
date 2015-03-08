@@ -1,0 +1,84 @@
+/**************************************************************************
+**       Title: 
+**    $RCSfile: $
+**   $Revision: $$Name:  $
+**       $Date: $
+**   Copyright: GPL $Author: $
+** Description:
+**
+**    
+**
+**-------------------------------------------------------------------------
+**
+**  $Log: $
+**
+**
+**************************************************************************/
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+int
+fanmerc::Team::statAsInt( const std::string& name, bool* exists) const
+{
+  return atoi( statAsString( name, exists).c_str());
+}
+  
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+template<class VALUETYPE>
+inline
+void
+fanmerc::Team::setStat( const std::string& name, const VALUETYPE& value)
+{
+  std::stringstream stream;
+  stream << value;
+  _stats[name] = stream.str();
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+std::string
+fanmerc::Team::statAsString( const std::string& name, bool* exists) const
+{
+  std::string ret;
+  
+  std::map<std::string,std::string>::const_iterator it = _stats.find( name);
+  if( it != _stats.end())
+  {
+    if( exists != 0)
+    {
+      *exists = true;
+    }
+          
+    ret = it->second;
+  }
+  else
+  {
+    if( exists != 0)
+    {
+      *exists = false;
+    }
+  }
+    
+  return ret;
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+std::string
+fanmerc::Team::name()
+{
+  return statAsString("name");
+}
+

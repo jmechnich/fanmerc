@@ -1,0 +1,107 @@
+/**************************************************************************
+**       Title: 
+**    $RCSfile: $
+**   $Revision: $$Name:  $
+**       $Date: $
+**   Copyright: GPL $Author: $
+** Description:
+**
+**    
+**
+**-------------------------------------------------------------------------
+**
+**  $Log: $
+**
+**
+**************************************************************************/
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+int
+fanmerc::GlobalState::statAsInt( const std::string& name, bool* exists) const
+{
+  return atoi( statAsString( name, exists).c_str());
+}
+  
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+template<class VALUETYPE>
+inline
+void
+fanmerc::GlobalState::setStat( const std::string& name, const VALUETYPE& value)
+{
+  std::stringstream stream;
+  stream << value;
+  _stats[name] = stream.str();
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+std::string
+fanmerc::GlobalState::statAsString( const std::string& name,
+                                    bool* exists) const
+{
+  std::string ret;
+  
+  std::map<std::string,std::string>::const_iterator it = _stats.find( name);
+  if( it != _stats.end())
+  {
+    if( exists != 0)
+    {
+      *exists = true;
+    }
+          
+    ret = it->second;
+  }
+  else
+  {
+    if( exists != 0)
+    {
+      *exists = false;
+    }
+  }
+    
+  return ret;
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+fanmerc::Town*
+fanmerc::GlobalState::town()
+{
+  if( _town == 0)
+  {
+    std::cerr << "Town not initialized" << std::endl;
+  }
+  
+  return _town;
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+fanmerc::Team*
+fanmerc::GlobalState::team()
+{
+  if( _team == 0)
+  {
+    std::cerr << "Team not initialized" << std::endl;
+  }
+  
+  return _team;
+}
+
+  

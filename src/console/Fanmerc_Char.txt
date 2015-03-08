@@ -1,0 +1,253 @@
+BEGIN GLOBALSTATE
+BEGIN MAIN
+
+date  666
+
+END MAIN
+
+BEGIN TOWN
+BEGIN BARRACKS
+
+level 1
+
+END BARRACKS
+END TOWN
+
+BEGIN TEAM
+BEGIN MAIN
+
+gold  573847
+name  Die Schwulen Böcke
+
+END MAIN
+
+BEGIN CHARACTER
+BEGIN MAIN
+
+name		Tolfo
+gender		MALE
+race		HUMAN
+class		WARRIOR
+level		1
+experience	0
+
+END MAIN
+
+
+BEGIN STATS
+
+attr_strength		35
+attr_dexterity		25
+attr_speed		25
+attr_constitution	25
+attr_magic		10
+attr_left		0
+
+skill_combat_blade	3
+skill_combat_blunt 	2
+skill_combat_point 	2
+skill_combat_staves	1
+skill_combat_bow	1
+skill_combat_crossbow	1
+skill_combat_sling	1
+skill_combat_throw	1
+skill_combat_parry	2
+skill_combat_dodge	1
+skill_combat_armor	2
+skill_combat_shield	1
+skill_combat_left	0
+
+skill_misc_perception	1
+skill_misc_swim		1
+skill_misc_climb	1
+skill_misc_stealth	1
+skill_misc_ancient	1
+skill_misc_nature	1
+skill_misc_social	1
+skill_misc_magic	1
+skill_misc_disarm	1
+skill_misc_healing	2
+skill_misc_track	1
+skill_misc_identify	2
+skill_misc_left		0
+	
+skill_magic_fire	1
+skill_magic_air		1
+skill_magic_water	1
+skill_magic_earth	1
+skill_magic_necromancer	0
+skill_magic_mind	0
+skill_magic_beneficial	0
+skill_magic_nature	0
+skill_magic_healing	0
+skill_magic_offensive	0
+skill_magic_create	0
+skill_magic_prayers	0
+skill_magic_left	0
+
+resist_fire		5
+resist_ice		0
+resist_lightning	0
+resist_poison		0
+resist_acid		0
+resist_mind		0
+resist_evil		0
+
+END STATS
+
+
+BEGIN LOCATIONS
+BEGIN RHAND
+BEGIN ITEM
+BEGIN MAIN
+
+class		WEAPON
+category	BLADE
+type		SWORD
+itemtype	OHAND
+level		5
+name		Sword Of The Heavens
+dicenumber	3
+dicetype	6
+dicemod		10
+attack		10
+value		2000
+
+END MAIN
+
+BEGIN STATS
+
+attr_strength	10
+
+END STATS
+
+BEGIN REQUIREMENTS
+
+level		2
+attr_strength	50
+
+END REQUIREMENTS
+END ITEM
+END RHAND
+
+BEGIN LHAND
+BEGIN ITEM
+
+
+END ITEM
+END LHAND
+
+BEGIN MISSILE
+BEGIN ITEM
+
+
+END ITEM
+END MISSILE
+
+BEGIN HEAD
+BEGIN ITEM
+
+
+END ITEM
+END HEAD
+
+BEGIN AMULETT
+BEGIN ITEM
+
+
+END ITEM
+END AMULETT
+
+BEGIN ARMOR
+BEGIN ITEM
+
+
+END ITEM
+END ARMOR
+
+BEGIN BRACELETS
+BEGIN ITEM
+
+
+END ITEM
+END BRACELETS
+
+BEGIN BELT
+BEGIN ITEM
+
+
+END ITEM
+END BELT
+
+BEGIN RRING
+BEGIN ITEM
+
+
+END ITEM
+END RRING
+
+BEGIN LRING
+BEGIN ITEM
+
+
+END ITEM
+END LRING
+
+BEGIN GLOVES
+BEGIN ITEM
+
+
+END ITEM
+END GLOVES
+
+BEGIN CAPE
+BEGIN ITEM
+
+
+END ITEM
+END CAPE
+
+BEGIN BOOTS
+BEGIN ITEM
+
+
+END ITEM
+END BOOTS
+END LOCATIONS
+
+
+BEGIN ACTIVE
+BEGIN ITEM
+
+END ITEM
+
+BEGIN ITEM
+
+END ITEM
+
+BEGIN ITEM
+
+END ITEM
+
+BEGIN ITEM
+
+END ITEM
+END ACTIVE
+
+
+BEGIN PASSIVE
+BEGIN ITEM
+
+END ITEM
+
+BEGIN ITEM
+
+END ITEM
+
+BEGIN ITEM
+
+END ITEM
+END PASSIVE
+END CHARACTER
+END TEAM
+END GLOBALSTATE

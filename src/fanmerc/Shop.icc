@@ -1,0 +1,155 @@
+/**************************************************************************
+**       Title: 
+**    $RCSfile: $
+**   $Revision: $$Name:  $
+**       $Date: $
+**   Copyright: GPL $Author: $
+** Description:
+**
+**    
+**
+**-------------------------------------------------------------------------
+**
+**  $Log: $
+**
+**
+**************************************************************************/
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+int
+fanmerc::Shop::statAsInt( const std::string& name, bool* exists) const
+{
+  return atoi( statAsString( name, exists).c_str());
+}
+  
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+template<class VALUETYPE>
+inline
+void
+fanmerc::Shop::setStat( const std::string& name, const VALUETYPE& value)
+{
+  std::stringstream stream;
+  stream << value;
+  _stats[name] = stream.str();
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+std::string
+fanmerc::Shop::statAsString( const std::string& name, bool* exists) const
+{
+  std::string ret;
+  
+  std::map<std::string,std::string>::const_iterator it = _stats.find( name);
+  if( it != _stats.end())
+  {
+    if( exists != 0)
+    {
+      *exists = true;
+    }
+          
+    ret = it->second;
+  }
+  else
+  {
+    if( exists != 0)
+    {
+      *exists = false;
+    }
+  }
+    
+  return ret;
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+void
+fanmerc::Shop::exec( const std::string& action)
+{}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+std::string
+fanmerc::Shop::possibleActions() const
+{
+  std::stringstream stream;
+  
+  for( std::map<std::string,std::string>::const_iterator it =
+           _descriptions.begin(); it != _descriptions.end(); ++it)
+  {
+    stream << it->first << std::endl;
+  }
+  return stream.str();
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+std::string
+fanmerc::Shop::name()
+{
+  return _stats["name"];
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+fanmerc::Shop::const_iterator
+fanmerc::Shop::statsBegin() const
+{
+  return _stats.begin();
+}
+
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+fanmerc::Shop::const_iterator
+fanmerc::Shop::statsEnd() const
+{
+  return _stats.end();
+}
+  
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+fanmerc::Shop::const_iterator
+fanmerc::Shop::descBegin() const
+{
+  return _descriptions.begin();
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+fanmerc::Shop::const_iterator
+fanmerc::Shop::descEnd() const
+{
+  return _descriptions.end();
+}

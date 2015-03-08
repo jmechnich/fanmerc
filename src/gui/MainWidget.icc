@@ -1,0 +1,124 @@
+/**************************************************************************
+**       Title: 
+**    $RCSfile: $
+**   $Revision: $$Name:  $
+**       $Date: $
+**   Copyright: GPL $Author: $
+** Description:
+**
+**    
+**
+**-------------------------------------------------------------------------
+**
+**  $Log: $
+**
+**
+**************************************************************************/
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+QPixmap*
+fanmerc::MainWidget::getPixmap( const QString& fileName)
+{
+  PointerMap<QPixmap*>::iterator it = _imageMap->find( fileName.latin1());
+  if( it != _imageMap->end())
+  {
+    return it->second;
+  }
+  else
+  {
+    std::cerr << "Image " << fileName.latin1() << " not in cache" << std::endl;
+    return 0;
+  }
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+QBitmap*
+fanmerc::MainWidget::getMask( const QString& fileName)
+{
+  PointerMap<QBitmap*>::iterator it = _maskMap->find( fileName.latin1());
+  if( it != _maskMap->end())
+  {
+    return it->second;
+  }
+  else
+  {
+    std::cerr << "Mask " << fileName.latin1() << " not in cache" << std::endl;
+    return 0;
+  }
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+QSound*
+fanmerc::MainWidget::getSound( const QString& fileName)
+{
+  PointerMap<QSound*>::iterator it = _soundMap->find( fileName.latin1());
+  if( it != _soundMap->end())
+  {
+    return it->second;
+  }
+  else
+  {
+    std::cerr << "Sound " << fileName.latin1() << " not in cache" << std::endl;
+    return 0;
+  }
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+void
+fanmerc::MainWidget::beep()
+{
+  QSound* sound = getSound( "drop.wav");
+  if( sound != 0)
+  {
+    sound->play();
+  }
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+fanmerc::GlobalState*
+fanmerc::MainWidget::global()
+{
+  return _globalState;
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+fanmerc::Town*
+fanmerc::MainWidget::town()
+{
+  return _globalState->town();
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+fanmerc::Team*
+fanmerc::MainWidget::team()
+{
+  return _globalState->team();
+}

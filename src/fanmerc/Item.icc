@@ -1,0 +1,173 @@
+/**************************************************************************
+**       Title: 
+**    $RCSfile: $
+**   $Revision: $$Name:  $
+**       $Date: $
+**   Copyright: GPL $Author: $
+** Description:
+**
+**    
+**
+**-------------------------------------------------------------------------
+**
+**  $Log: $
+**
+**
+**************************************************************************/
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+std::string
+fanmerc::Item::type() const
+{
+  return statAsString( "type");
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+void
+fanmerc::Item::setOwner( Character* owner)
+{
+  if( _type != "NOWEAR")
+  {
+    _owner = owner;
+  }
+  else
+  {
+    std::cerr << "Item is not wearable" << std::endl;
+  }
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+const fanmerc::Character*
+fanmerc::Item::owner() const
+{
+  return _owner;
+}
+
+    
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+template<class VALUETYPE>
+inline
+void
+fanmerc::Item::setStat( const std::string& name, const VALUETYPE& value)
+{
+  std::stringstream stream;
+  stream << value;
+  _stats[name] = stream.str();
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+template<class VALUETYPE>
+inline
+void
+fanmerc::Item::setRequirement( const std::string& name, const VALUETYPE& value)
+{
+  std::stringstream stream;
+  stream << value;
+  _requirements[name] = stream.str();
+}
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+int
+fanmerc::Item::statAsInt( const std::string& name, bool* exists) const
+{
+  return atoi( statAsString( name, exists).c_str());
+}
+
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+int
+fanmerc::Item::requirementAsInt( const std::string& name, bool* exists) const
+{
+  return atoi( requirementAsString( name, exists).c_str());
+}
+
+
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+std::string
+fanmerc::Item::statAsString( const std::string& name, bool* exists) const
+{
+  std::string ret;
+
+  std::map<std::string,std::string>::const_iterator it = _stats.find( name);
+  if( it != _stats.end())
+  {
+    if( exists != 0)
+    {
+      *exists = true;
+    }
+    
+    ret = it->second;
+  }
+  else
+  {
+    if( exists != 0)
+    {
+      *exists = true;
+    }
+  }
+  
+  return ret;
+}
+  
+/*=========================================================================
+ *  DESCRIPTION OF FUNCTION:
+ *  ==> see headerfile
+ *=======================================================================*/
+inline
+std::string
+fanmerc::Item::requirementAsString( const std::string& name,
+                                    bool* exists) const
+{
+  std::string ret;
+
+  std::map<std::string,std::string>::const_iterator it =
+      _requirements.find( name);
+  if( it != _requirements.end())
+  {
+    if( exists != 0)
+    {
+      *exists = true;
+    }
+    
+    ret = it->second;
+  }
+  else
+  {
+    if( exists != 0)
+    {
+      *exists = true;
+    }
+  }
+  
+  return ret;
+}
